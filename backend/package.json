@@ -7,13 +7,18 @@
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "dev": "node --watch src/server.js",
-    "build": "tsc",
+    "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^4.21.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "chai": "^4.5.0",
+    "mocha": "^10.8.0",
+    "nodemon": "^3.1.14"
   }
 }

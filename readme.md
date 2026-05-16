@@ -10,7 +10,7 @@ backend/
 ├── services/
 ├── utils/
 ├── package.json
-├── pnpm-workspace.yaml
+├── package-lock.json
 ├── server.js
 └── .nvmrc
 ```
