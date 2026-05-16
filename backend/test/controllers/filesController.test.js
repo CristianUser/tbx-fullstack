@@ -7,7 +7,9 @@ describe('Files Controller', () => {
   let req, res, next;
 
   beforeEach(() => {
-    req = {};
+    req = {
+      query: {}
+    };
     res = {
       json: sinon.stub().returnsThis(),
       status: sinon.stub().returnsThis()
@@ -58,6 +60,21 @@ describe('Files Controller', () => {
       const responseData = res.json.getCall(0).args[0];
       expect(responseData[0].lines).to.have.lengthOf(1);
       expect(responseData[0].lines[0].text).to.equal('hello');
+    });
+
+    it('should return data for a specific file when fileName query param is provided', async () => {
+      req.query = { fileName: 'test2.csv' };
+      sinon.stub(echoService, 'getFileByName').resolves('file,text,number,hex\ntest2.csv,filtered,999,40cc0f0fe8820f5ff092736f19f71e3c');
+      const listFilesStub = sinon.stub(echoService, 'listFiles');
+
+      await getFilesData(req, res);
+
+      expect(listFilesStub.called).to.be.false;
+      expect(res.json.calledOnce).to.be.true;
+      const responseData = res.json.getCall(0).args[0];
+      expect(responseData).to.have.lengthOf(1);
+      expect(responseData[0].file).to.equal('test2.csv');
+      expect(responseData[0].lines[0].text).to.equal('filtered');
     });
   });
 });

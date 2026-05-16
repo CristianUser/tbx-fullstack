@@ -2,10 +2,19 @@ import echoService from '../services/echo.js';
 import { parseCsv } from '../utils/csv.js';
 import { validateCsvLine } from '../utils/validation.js';
 
-export const getFilesData = async (_req, res) => {
+export const getFilesData = async (req, res) => {
   try {
-    const { files } = await echoService.listFiles();
-    const filesData = await Promise.all(files.map(async (file) => {
+    const fileNameParam = req.query.fileName
+    let filesToProcess = []
+
+    if (fileNameParam) {
+      filesToProcess.push(fileNameParam)
+    } else {
+      const { files } = await echoService.listFiles();
+      filesToProcess = files
+    }
+
+    const filesData = await Promise.all(filesToProcess.map(async (file) => {
       const data = await echoService.getFileByName(file);
 
       return { 
