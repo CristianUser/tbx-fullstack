@@ -1,0 +1,19 @@
+{
+  "name": "tbx-backend",
+  "version": "1.0.0",
+  "description": "Express Rest API",
+  "license": "ISC",
+  "author": "",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "build": "tsc",
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
