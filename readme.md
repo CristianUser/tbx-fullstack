@@ -106,3 +106,10 @@ cd frontend
 nvm use
 npm test
 ```
+
+---
+
+## Technical Decisions
+
+### State Management (Why no Redux?)
+Although Redux was listed as an optional point for the frontend, it was intentionally omitted in favor of React's built-in Hooks (`useState` and `useEffect`). Given the simplicity of the application—which primarily consists of fetching data from a single endpoint and filtering it—introducing Redux would have added unnecessary boilerplate and complexity (over-engineering) without providing tangible benefits. React's native state management is more than sufficient and keeps the codebase clean and maintainable.
