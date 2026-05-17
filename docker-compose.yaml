@@ -1,0 +1,16 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "3000:3000"
+    environment:
+      - ECHO_SERVICE_API_KEY=${ECHO_SERVICE_API_KEY}
+      - ECHO_SERVICE_API_URL=${ECHO_SERVICE_API_URL}
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend

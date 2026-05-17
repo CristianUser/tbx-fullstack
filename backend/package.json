@@ -10,7 +10,6 @@
     "dev": "nodemon server.js",
     "start": "node server.js",
     "test": "mocha --recursive"
-
   },
   "dependencies": {
     "cors": "^2.8.6",
