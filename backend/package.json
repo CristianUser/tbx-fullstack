@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js",
-    "test": "mocha --recursive"
+    "test": "mocha --recursive",
+    "lint": "standard --fix"
   },
   "dependencies": {
     "cors": "^2.8.6",
@@ -20,6 +21,14 @@
     "chai": "^4.5.0",
     "mocha": "^10.8.0",
     "nodemon": "^3.1.14",
-    "sinon": "^22.0.0"
-  }
+    "sinon": "^22.0.0",
+    "standard": "^17.1.2"
+  },
+  "standard": {
+    "ignore": [
+      "**/dist/",
+      "**/node_modules/**",
+      "**/test/**"
+    ]
+}
 }

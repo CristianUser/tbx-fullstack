@@ -7,25 +7,25 @@
  * @param {function} options.validator Validator function to determine if a row is valid.
  * @returns {Object[]} Array of objects representing the CSV data.
  */
-export function parseCsv(csv, options = {}) {
-  const { skipColumns = [], skipInvalidRows = false, validator = () => true } = options;
+export function parseCsv (csv, options = {}) {
+  const { skipColumns = [], skipInvalidRows = false, validator = () => true } = options
 
-  const lines = csv.split('\n');
-  const headers = lines[0].split(',');
+  const lines = csv.split('\n')
+  const headers = lines[0].split(',')
   const data = lines.slice(1).map((line) => {
-    const values = line.split(',');
-    const obj = {};
+    const values = line.split(',')
+    const obj = {}
     headers.forEach((header, index) => {
       if (!skipColumns.includes(header)) {
-        obj[header] = values[index];
+        obj[header] = values[index]
       }
-    });
-    return obj;
-  });
+    })
+    return obj
+  })
 
   if (skipInvalidRows) {
-    return data.filter((line) => validator(line));
+    return data.filter((line) => validator(line))
   }
 
-  return data;
+  return data
 };
