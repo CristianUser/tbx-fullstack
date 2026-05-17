@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { getFilesData } from './controllers/filesController.js';
+import filesController from './controllers/files.js';
 
 const app = express();
 
@@ -11,7 +11,9 @@ app.get('/health', (_req, res) => {
   res.json({ message: 'Server is running' });
 });
 
-app.get('/files/data', getFilesData);
+// Ideally we should use a router but for now it's just one resource so we can define the routes directly here
+app.get('/files/list', filesController.getFiles);
+app.get('/files/data', filesController.getFilesData);
 
 
 const port = process.env.PORT || 3000;

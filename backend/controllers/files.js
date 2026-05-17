@@ -2,7 +2,12 @@ import echoService from '../services/echo.js';
 import { parseCsv } from '../utils/csv.js';
 import { validateCsvLine } from '../utils/validation.js';
 
-export const getFilesData = async (req, res) => {
+/**
+ * Endpoint to get all files data or filtered by fileName param
+ * @param {*} req 
+ * @param {*} res 
+ */
+const getFilesData = async (req, res) => {
   try {
     const fileNameParam = req.query.fileName
     let filesToProcess = []
@@ -20,8 +25,8 @@ export const getFilesData = async (req, res) => {
       return { 
         file, 
         lines: parseCsv(data, { 
-          skipColumnIndexes: [0], 
-          skipRowsWithInvalidValues: true, 
+          skipColumns: ['file'], 
+          skipInvalidRows: true, 
           validator: validateCsvLine
         }) 
       };
@@ -31,3 +36,14 @@ export const getFilesData = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+const getFiles = async (req, res) => {
+  try {
+    const { files } = await echoService.listFiles();
+    res.json(files);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+export default { getFilesData, getFiles }

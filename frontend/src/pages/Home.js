@@ -4,6 +4,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import Layout from '../components/Layout';
 
+const API_URL = 'http://localhost:3000';
 
 const Home = () => {
   const [filesData, setFilesData] = React.useState([]);
@@ -15,7 +16,7 @@ const Home = () => {
     const abortController = new AbortController();
     setLoading(true);
     setError(null);
-    const url = new URL('http://localhost:3000/files/data');
+    const url = new URL(`${API_URL}/files/data`);
     if (fileNameFilter) {
       url.searchParams.append('fileName', fileNameFilter);
     }

@@ -17,7 +17,7 @@ describe('CSV Utils', () => {
     });
 
     it('should skip specified columns', () => {
-      const result = parseCsv(csvContent, { skipColumnIndexes: [0] });
+      const result = parseCsv(csvContent, { skipColumns: ['file'] });
       expect(result[0]).to.not.have.property('file');
       expect(result[0]).to.have.property('text', 'hello');
     });
@@ -25,7 +25,7 @@ describe('CSV Utils', () => {
     it('should filter invalid rows using validator', () => {
       const validator = (row) => row.number === '456';
       const result = parseCsv(csvContent, { 
-        skipRowsWithInvalidValues: true, 
+        skipInvalidRows: true, 
         validator 
       });
       expect(result).to.have.lengthOf(1);
